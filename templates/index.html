@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>🎙️Transkript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: "cursive";
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #0d1b2a;
+            z-index: -1;
+        }
+      .container {
+    max-width: 1000px;
+    width: 95%;
+    background: rgba(176, 26, 26, 0.459);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    z-index: 1;
+    color: #fff;
+}
+.output-box {
+    margin-top: 15px;
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+    color: #000;
+}
+.output-box h2, 
+.output-box h3, 
+.output-box p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <h2 class="text-center mb-4">🎙️ Ses Dosyasını Metne Dönüştür</h2>
+        <form method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+    <div class="mb-3">
+        <label for="file" class="form-label">Ses Dosyası Seç (.mp3)</label>
+        <input class="form-control" type="file" name="file" id="file" required>
+    </div>
+    <div class="d-grid">
+        <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">
+            Yükle ve Dönüştür
+        </button>
+    </div>
+</form>
+
+
+        {% if metin %}
+    <div class="output-box mt-1">
+        <h5>🎧 Dönüştürülen Metin:</h5>
+        <p>{{ metin }}</p>
+    </div>
+        {% if ozet %}
+        <div class="output-box mt-4">
+            <h5>📝 Metnin Özeti:</h5>
+            <p>{{ ozet }}</p>
+        </div>
+        {% endif %}
+          {% endif %}
+
+    </div>
+  <script>
+    function showLoading() {
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerHTML = `
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            İşleniyor...
+        `;
+    }
+    </script>
+
+    <p style="position: fixed; bottom: 20px; left: 20px; color:#ffffff;">Designer by: Burak Tuğrul Aşık & Tarık Kahraman</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 110, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "star", "stroke": { "width": 0, "color": "#ffffff" }, "polygon": { "nb_sides": 5 } },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": false },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "repulse": { "distance": 100, "duration": 0.4 },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
